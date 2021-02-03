@@ -1,0 +1,12 @@
+name: 'PagerDuty Alert'
+description: 'GitHub Action to send a critical PagerDuty alert, e.g. on action failure.'
+inputs:
+  pagerduty-integration-key:
+    description: 'The integration key for your PagerDuty service'
+    required: true
+runs:
+  using: 'node12'
+  main: 'index.js'
+branding:
+  icon: 'alert-triangle'
+  color: 'red'
