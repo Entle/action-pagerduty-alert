@@ -23,7 +23,7 @@ async function sendAlert(alert) {
 try {
   const integrationKey = core.getInput('pagerduty-integration-key');
 
-  sendAlert({
+  let alert = {
     payload: {
       summary: `${context.repo.repo}: Error in "${context.workflow}" run by @${context.actor}`,
       timestamp: new Date().toISOString(),
@@ -38,7 +38,12 @@ try {
     },
     routing_key: integrationKey,
     event_action: 'trigger',
-  });
+  };
+  const dedup_key = core.getInput('dedup_key');
+  if (dedup_key != '') {
+    alert.dedup_key = dedup_key;
+  }
+  sendAlert(alert);
 } catch (error) {
   core.setFailed(error.message);
 }
