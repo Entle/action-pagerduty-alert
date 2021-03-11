@@ -26,3 +26,17 @@ In your `steps`:
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
 ```
+
+### Setting a dedup_key
+
+You can optionally specify a `dedup_key` for your alert. This will enable PagerDuty to coalesce multiple alerts into one.
+More documentation is available [here](https://developer.pagerduty.com/docs/events-api-v2/trigger-events/).
+
+```yaml
+- name: Send PagerDuty alert on failure
+  if: ${{ failure() }}
+  uses: Entle/action-pagerduty-alert@0.1.0
+  with:
+    pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
+    dedup_key: github_workflow_failed
+```
