@@ -39,9 +39,9 @@ try {
     routing_key: integrationKey,
     event_action: 'trigger',
   };
-  const dedup_key = core.getInput('dedup_key');
-  if (dedup_key != '') {
-    alert.dedup_key = dedup_key;
+  const dedupKey = core.getInput('pagerduty-dedup-key');
+  if (dedupKey != '') {
+    alert.dedup_key = dedupKey;
   }
   sendAlert(alert);
 } catch (error) {

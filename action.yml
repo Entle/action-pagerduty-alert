@@ -4,8 +4,8 @@ inputs:
   pagerduty-integration-key:
     description: 'The integration key for your PagerDuty service'
     required: true
-  dedup_key:
-    description: 'The key used to correlate triggers, acknowledges, and resolves for the same alert.'
+  pagerduty-dedup-key:
+    description: 'The key used to correlate PagerDuty triggers, acknowledges, and resolves for the same alert.'
     required: false
 runs:
   using: 'node12'
