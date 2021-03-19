@@ -15,6 +15,11 @@ Sends a critical PagerDuty alert, e.g. on action failure.
 
 **Required:** the integration key for your PagerDuty service
 
+`dedup_key`
+
+**Optional:** a `dedup_key` for your alert. This will enable PagerDuty to coalesce multiple alerts into one.
+More documentation is available [here](https://developer.pagerduty.com/docs/events-api-v2/trigger-events/).
+
 ## Example usage
 
 In your `steps`:
@@ -25,4 +30,5 @@ In your `steps`:
   uses: Entle/action-pagerduty-alert@0.1.0
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
+    dedup_key: github_workflow_failed
 ```
