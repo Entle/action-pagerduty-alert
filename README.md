@@ -27,7 +27,7 @@ In your `steps`:
 ```yaml
 - name: Send PagerDuty alert on failure
   if: ${{ failure() }}
-  uses: Entle/action-pagerduty-alert@0.1.0
+  uses: Entle/action-pagerduty-alert@0.2.0
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
