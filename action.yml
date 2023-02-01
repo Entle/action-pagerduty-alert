@@ -8,7 +8,7 @@ inputs:
     description: 'The key used to correlate PagerDuty triggers, acknowledges, and resolves for the same alert.'
     required: false
 runs:
-  using: 'node12'
+  using: 'node16'
   main: 'index.js'
 branding:
   icon: 'alert-triangle'
