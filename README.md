@@ -18,11 +18,16 @@ Sends a critical PagerDuty alert, e.g. on action failure.
 `pagerduty-dedup-key`
 
 **Optional:** a `dedup_key` for your alert. This will enable PagerDuty to coalesce multiple alerts into one.
+
+`resolve`
+
+**Optional:** If set to true, will resolve any active alerts with `dedup_key`. This allows you to automatically resolve alerts for a job if a subsequent run is successful.
+
 More documentation is available [here](https://developer.pagerduty.com/docs/events-api-v2/trigger-events/).
 
 ## Example usage
 
-In your `steps`:
+Adding this to your `steps` will page if the job fails:
 
 ```yaml
 - name: Send PagerDuty alert on failure
@@ -32,3 +37,17 @@ In your `steps`:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
 ```
+
+This config will resolve the page if the job subsequently succeeds:
+
+```yaml
+- name: Send PagerDuty alert on failure
+  if: ${{ !failure() }}
+  uses: Entle/action-pagerduty-alert@0.2.0
+  with:
+    pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
+    pagerduty-dedup-key: github_workflow_failed
+    resolve: true
+```
+
+Customizing the logic within the `if` configs allows for more complex page and resolution behavior.
