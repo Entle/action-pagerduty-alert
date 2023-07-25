@@ -32,7 +32,7 @@ Adding this to your `steps` will page if the job fails:
 ```yaml
 - name: Send PagerDuty alert on failure
   if: ${{ failure() }}
-  uses: Entle/action-pagerduty-alert@0.2.0
+  uses: Entle/action-pagerduty-alert@0.3.0
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
@@ -41,9 +41,9 @@ Adding this to your `steps` will page if the job fails:
 This config will resolve the page if the job subsequently succeeds:
 
 ```yaml
-- name: Send PagerDuty alert on failure
+- name: Resolve PagerDuty alert on success
   if: ${{ !failure() }}
-  uses: Entle/action-pagerduty-alert@0.2.0
+  uses: Entle/action-pagerduty-alert@0.3.0
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
