@@ -7,6 +7,10 @@ inputs:
   pagerduty-dedup-key:
     description: 'The key used to correlate PagerDuty triggers, acknowledges, and resolves for the same alert.'
     required: false
+  event-type:
+    description: 'Trigger or resolve this alert? Default is trigger (Valid values: trigger, resolve)'
+    default: 'trigger'
+    required: false
 runs:
   using: 'node12'
   main: 'index.js'

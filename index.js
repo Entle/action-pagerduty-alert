@@ -22,6 +22,7 @@ async function sendAlert(alert) {
 // Run the action
 try {
   const integrationKey = core.getInput('pagerduty-integration-key');
+  const eventAction = core.getInput('event-type');
 
   let alert = {
     payload: {
@@ -37,7 +38,7 @@ try {
       },
     },
     routing_key: integrationKey,
-    event_action: 'trigger',
+    event_action: eventAction,
   };
   const dedupKey = core.getInput('pagerduty-dedup-key');
   if (dedupKey != '') {
