@@ -15,6 +15,10 @@ Sends a critical PagerDuty alert, e.g. on action failure.
 
 **Required:** the integration key for your PagerDuty service
 
+`runbook-url`
+
+**Required:** the URL to a runbook to help triage the failure.
+
 `pagerduty-dedup-key`
 
 **Optional:** a `dedup_key` for your alert. This will enable PagerDuty to coalesce multiple alerts into one.

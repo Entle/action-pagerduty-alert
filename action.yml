@@ -4,6 +4,9 @@ inputs:
   pagerduty-integration-key:
     description: 'The integration key for your PagerDuty service'
     required: true
+  runbook-url:
+    description: 'The URL of the runbook associated with this alert'
+    required: true
   pagerduty-dedup-key:
     description: 'The key used to correlate PagerDuty triggers, acknowledges, and resolves for the same alert.'
     required: false
