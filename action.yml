@@ -7,9 +7,12 @@ inputs:
   pagerduty-dedup-key:
     description: 'The key used to correlate PagerDuty triggers, acknowledges, and resolves for the same alert.'
     required: false
+  runbook-url:
+    description: 'The URL of the runbook associated with the alert.'
+    required: false
   resolve:
     description: 'If set to true, will resolve any alert with the same pagerduty-dedup-key (if such an alert exists).'
-    required: false
+    required: false  
 runs:
   using: 'node20'
   main: 'index.js'
