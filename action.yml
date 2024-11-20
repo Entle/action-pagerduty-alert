@@ -11,7 +11,7 @@ inputs:
     description: 'If set to true, will resolve any alert with the same pagerduty-dedup-key (if such an alert exists).'
     required: false
 runs:
-  using: 'node12'
+  using: 'node20'
   main: 'index.js'
 branding:
   icon: 'alert-triangle'

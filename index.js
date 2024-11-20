@@ -1,21 +1,22 @@
-const core = require('@actions/core');
-const { context } = require('@actions/github');
-const axios = require('axios');
+import core from '@actions/core';
+import { context } from '@actions/github';
 
 // Trigger the PagerDuty webhook with a given alert
 async function sendAlert(alert) {
-  try {
-    const response = await axios.post('https://events.pagerduty.com/v2/enqueue', alert);
+  const response = await fetch('https://events.pagerduty.com/v2/enqueue', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(alert),
+  });
 
-    if (response.status === 202) {
-      console.log(`Successfully sent PagerDuty alert. Response: ${JSON.stringify(response.data)}`);
-    } else {
-      core.setFailed(
-        `PagerDuty API returned status code ${response.status} - ${JSON.stringify(response.data)}`
-      );
-    }
-  } catch (error) {
-    core.setFailed(error.message);
+  if (response.status === 202) {
+    console.log(`Successfully sent PagerDuty alert. Response: ${JSON.stringify(response.data)}`);
+  } else {
+    core.setFailed(
+      `PagerDuty API returned status code ${response.status} - ${JSON.stringify(response.data)}`
+    );
   }
 }
 
