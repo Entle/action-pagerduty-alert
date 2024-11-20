@@ -43,6 +43,10 @@ try {
   if (dedupKey != '') {
     alert.dedup_key = dedupKey;
   }
+  const shouldResolve = core.getInput('resolve');
+  if (shouldResolve == 'true') {
+    alert.event_action = 'resolve';
+  }
   sendAlert(alert);
 } catch (error) {
   core.setFailed(error.message);
