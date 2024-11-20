@@ -1,32 +1,14 @@
 import core from '@actions/core';
-import { context } from '@actions/github';
 import sendAlert from './lib/send-alert';
+import prepareAlert from './lib/prepare-alert';
 
 try {
-  const integrationKey = core.getInput('pagerduty-integration-key');
+  const pagerDutyintegrationKey = core.getInput('pagerduty-integration-key'); // Required
+  const pagerDutyDedupKey = core.getInput('pagerduty-dedup-key'); // Optional
+  const runbookUrl = core.getInput('runbook-url'); // Optional
+  const resolve = core.getInput('resolve'); // Optional
 
-  const dedupKey = core.getInput('pagerduty-dedup-key'); // Optional
-  const shouldResolve = core.getInput('resolve'); // Optional
-
-  const alert = {
-    payload: {
-      summary: `${context.repo.repo}: Error in "${context.workflow}" run by @${context.actor}`,
-      timestamp: new Date().toISOString(),
-      source: 'GitHub Actions',
-      severity: 'critical',
-      custom_details: {
-        run_details: `https://github.com/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`,
-        related_commits: context.payload.commits
-          ? context.payload.commits.map((commit) => `${commit.message}: ${commit.url}`).join(', ')
-          : 'No related commits',
-      },
-    },
-    routing_key: integrationKey,
-    event_action: 'trigger',
-    ...(dedupKey ? { dedup_key: dedupKey } : {}),
-    ...(shouldResolve ? { event_action: 'resolve' } : {}),
-  };
-
+  const alert = prepareAlert(pagerDutyintegrationKey, pagerDutyDedupKey, runbookUrl, resolve);
   await sendAlert(alert);
 } catch (error) {
   core.setFailed(error.message);
