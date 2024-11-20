@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.2
+
+- Fix module import.
+
 ## 1.0.1
 
 - Fix missing ESM config in `package.json`.

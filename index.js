@@ -1,6 +1,6 @@
 import core from '@actions/core';
-import sendAlert from './lib/send-alert';
-import prepareAlert from './lib/prepare-alert';
+import sendAlert from './lib/send-alert.js';
+import prepareAlert from './lib/prepare-alert.js';
 
 try {
   const pagerDutyintegrationKey = core.getInput('pagerduty-integration-key'); // Required
