@@ -1,8 +1,9 @@
 {
   "name": "action-pagerduty-alert",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "GitHub Action to send a critical PagerDuty alert",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
