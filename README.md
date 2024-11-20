@@ -59,4 +59,4 @@ Optionally, add the below step after the one above to resolve the alert if a sub
     resolve: true
 ```
 
-Adding both steps to your job will create an alert when the job fails, and resolve the job when it succeeds. Using `${{ github.workflow }}` for `pagerduty-dedup-key` (or any other key that is unique per-workflow) allows multiple jobs that each trigger and resolve alerts independently, while customizing the logic within the `if` configs allows for more complex page and resolution behavior.
+Adding both steps to your job will create an alert when the job fails, and resolve the alert when the job succeeds. Using `${{ github.workflow }}` for `pagerduty-dedup-key` (or any other key that is unique per-workflow) allows multiple jobs that each trigger and resolve alerts independently, while customizing the logic within the `if` configs allows for more complex page and resolution behavior.
