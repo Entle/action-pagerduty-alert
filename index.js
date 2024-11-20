@@ -1,30 +1,14 @@
 import core from '@actions/core';
 import { context } from '@actions/github';
+import sendAlert from './lib/send-alert';
 
-// Trigger the PagerDuty webhook with a given alert
-async function sendAlert(alert) {
-  const response = await fetch('https://events.pagerduty.com/v2/enqueue', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(alert),
-  });
-
-  if (response.status === 202) {
-    console.log(`Successfully sent PagerDuty alert. Response: ${JSON.stringify(response.data)}`);
-  } else {
-    core.setFailed(
-      `PagerDuty API returned status code ${response.status} - ${JSON.stringify(response.data)}`
-    );
-  }
-}
-
-// Run the action
 try {
   const integrationKey = core.getInput('pagerduty-integration-key');
 
-  let alert = {
+  const dedupKey = core.getInput('pagerduty-dedup-key'); // Optional
+  const shouldResolve = core.getInput('resolve'); // Optional
+
+  const alert = {
     payload: {
       summary: `${context.repo.repo}: Error in "${context.workflow}" run by @${context.actor}`,
       timestamp: new Date().toISOString(),
@@ -39,16 +23,11 @@ try {
     },
     routing_key: integrationKey,
     event_action: 'trigger',
+    ...(dedupKey ? { dedup_key: dedupKey } : {}),
+    ...(shouldResolve ? { event_action: 'resolve' } : {}),
   };
-  const dedupKey = core.getInput('pagerduty-dedup-key');
-  if (dedupKey != '') {
-    alert.dedup_key = dedupKey;
-  }
-  const shouldResolve = core.getInput('resolve');
-  if (shouldResolve == 'true') {
-    alert.event_action = 'resolve';
-  }
-  sendAlert(alert);
+
+  await sendAlert(alert);
 } catch (error) {
   core.setFailed(error.message);
 }
