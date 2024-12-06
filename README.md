@@ -51,7 +51,7 @@ Optionally, add the below step after the one above to resolve the alert if a sub
 
 ```yaml
 - name: Resolve PagerDuty alert on success
-  if: ${{ !failure() }}
+  if: ${{ !failure() && !cancelled() }}
   uses: Entle/action-pagerduty-alert@1.0.2
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
