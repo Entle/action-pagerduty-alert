@@ -14,7 +14,7 @@ inputs:
     description: 'If set to true, will resolve any alert with the same pagerduty-dedup-key (if such an alert exists).'
     required: false  
   severity:
-    description: 'Notification severity label.'
+    description: 'Notification severity label. If omitted, alerts will be "critical".'
     required: false
 runs:
   using: 'node20'
