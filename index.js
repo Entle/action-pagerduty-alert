@@ -7,8 +7,9 @@ try {
   const pagerDutyDedupKey = core.getInput('pagerduty-dedup-key'); // Optional
   const runbookUrl = core.getInput('runbook-url'); // Optional
   const resolve = core.getInput('resolve'); // Optional
+  const severity = core.getInput('severity'); // Optional
 
-  const alert = prepareAlert(pagerDutyintegrationKey, pagerDutyDedupKey, runbookUrl, resolve);
+  const alert = prepareAlert(pagerDutyintegrationKey, pagerDutyDedupKey, runbookUrl, resolve, severity);
   await sendAlert(alert);
 } catch (error) {
   core.setFailed(error.message);
