@@ -1,6 +1,6 @@
 # PagerDuty Alert GitHub Action
 
-Sends a critical PagerDuty alert, e.g. on action failure. Optionally, resolves on success.
+Sends a PagerDuty alert, e.g. on action failure. Optionally, resolves on success.
 
 ## Prerequisites
 
