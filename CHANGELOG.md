@@ -2,9 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
-## 1.0.2
+## 1.0.4
 
-- Fix module import.
+- (No changes) Re-publish to fix incorrect release version.
+
+## 1.0.3
+
+- Allow a custom severity label to be specified.
 
 ## 1.0.1
 

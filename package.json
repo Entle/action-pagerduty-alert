@@ -1,6 +1,6 @@
 {
   "name": "action-pagerduty-alert",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "GitHub Action to send a PagerDuty alert",
   "type": "module",
   "exports": "./index.js",

@@ -5,9 +5,9 @@ Sends a PagerDuty alert, e.g. on action failure. Optionally, resolves on success
 ## Prerequisites
 
 1. Create a service integration in PagerDuty:
-    1. Go to PagerDuty > "Services" > Pick your service > "Integrations" > "Add a new integration";
-    2. Choose a name (e.g. "Your GitHub CI/CD") and "Use our API directly" with "Events API v2";
-    3. Copy the integration key.
+   1. Go to PagerDuty > "Services" > Pick your service > "Integrations" > "Add a new integration";
+   2. Choose a name (e.g. "Your GitHub CI/CD") and "Use our API directly" with "Events API v2";
+   3. Copy the integration key.
 2. Set up a secret in your GitHub repo to store the integration key, e.g. "PAGERDUTY_INTEGRATION_KEY".
 
 ## Inputs
@@ -40,7 +40,7 @@ Adding this to your `steps` will send a PagerDuty alert if the job fails. It is 
 ```yaml
 - name: Send PagerDuty alert on failure
   if: ${{ failure() }}
-  uses: Entle/action-pagerduty-alert@1.0.3
+  uses: Entle/action-pagerduty-alert@1.0.4
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
@@ -52,7 +52,7 @@ Optionally, add the below step after the one above to resolve the alert if a sub
 ```yaml
 - name: Resolve PagerDuty alert on success
   if: ${{ !failure() && !cancelled() }}
-  uses: Entle/action-pagerduty-alert@1.0.3
+  uses: Entle/action-pagerduty-alert@1.0.4
   with:
     pagerduty-integration-key: '${{ secrets.PAGERDUTY_INTEGRATION_KEY }}'
     pagerduty-dedup-key: github_workflow_failed
