@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.0.5
+
+- Fix missing `core` dependency causing `undefined` error in `send-alert.js` (thanks [@johnhof](https://github.com/johnhof)!) 
+
 ## 1.0.4
 
 - (No changes) Re-publish to fix incorrect release version.
